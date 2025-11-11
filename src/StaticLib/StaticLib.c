@@ -36,11 +36,10 @@ void remove_next(list* l, node* p)
 	// 削除対象のノードがあるポインタを指定する。削除対象のノードを一時的に保持する'target'の宣言も同時に行う。
 	// p == NULLならリストの先頭ノード'1->header'を削除する。'p'の次である場合は'p->pNext'
 	node** target = (p == NULL) ? &l->header : &p->pNext; //二重ポインタ(ノードを指すポインタへのポインタ)
-	node* temp = *target; //'target'が指す削除対象のノードを得る。
+	temp = *target; //'target'が指す削除対象のノードを得る。
 
 	if (!temp) return; //(!temp)は(temp == NULL)と同義。削除対象が存在しなければ終了する。
 	*target = temp->pNext; //削除対象のノードを飛ばす。
-	free(temp); //削除対象のノードのメモリを開放する。
 }
 
 
