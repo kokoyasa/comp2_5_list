@@ -32,14 +32,17 @@ void remove_next(list* l, node* p)
 {
 	// ToDo: ここにコードを追加
 	if (!l) return; //(!l)は(l == NULL)と同義。リストが存在しない場合は終了する。
+	// ここでif (!l || !p) return;にすると、早期returnをして、先頭が削除できない場合がある。
+
 	node* temp = NULL; //初期化
-	// 削除対象のノードがあるポインタを指定する。削除対象のノードを一時的に保持する'target'の宣言も同時に行う。
+	// 削除対象のノードがあるポインタを指定する。削除対象のノードを一時的に保持する為の'target'を宣言する。
 	// p == NULLならリストの先頭ノード'1->header'を削除する。'p'の次である場合は'p->pNext'
 	node** target = (p == NULL) ? &l->header : &p->pNext; //二重ポインタ(ノードを指すポインタへのポインタ)
 	temp = *target; //'target'が指す削除対象のノードを得る。
 
 	if (!temp) return; //(!temp)は(temp == NULL)と同義。削除対象が存在しなければ終了する。
 	*target = temp->pNext; //削除対象のノードを飛ばす。
+	// Test側でメモリが開放されているので、ここでのfree()は不要。
 }
 
 
